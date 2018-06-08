@@ -29,7 +29,7 @@ end
 
 desc "Push image from CI to Docker Hub"
 task push: [:build] do
-  sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+  sh 'echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin'
   sh "docker tag #{IMAGE_NAME} #{IMAGE_NAME}:#{GIT_SHA}"
   sh "docker push #{IMAGE_NAME}:#{GIT_SHA}"
   sh "docker tag #{IMAGE_NAME} #{IMAGE_NAME}:latest"
